@@ -53,6 +53,7 @@ d = dict(
 	,full_name = 'Jane Doe'
 )
 d = parse_info(info_lines)
+d['mission_text'] = mission_text
 
 template = Template(template_string)
 result = template.safe_substitute(d)
