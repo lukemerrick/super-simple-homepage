@@ -1,0 +1,11 @@
+title: page title to be displayed on the tab in which page is open
+name: name to be shown front-and-center in large text
+subtitle: subtitle to be shown right under the name section in smaller text
+mission_title: header to the mission/mission-statement section of the page
+mission_text: (paragraph) text of the mission/mission-statement section of the page
+full_name: name to be used for copyright
+copyright_year: year to be used in the copyright section
+button_html: html code for the button links to be shown front-and-center
+	syntax = multiple instanes of "<li><a href="${LINK_TEXT_HERE}">&{LINK_NAME_HERE}</a></li><li class="footer-menu-divider">&sdot;</li>"
+link_html: html code for the links to be shown at the bottom of the page
+	syntax = multiple instanes of "<li><a href="${LINK_TEXT_HERE}">&{LINK_NAME_HERE}</a></li><li class="footer-menu-divider">&sdot;</li>"
