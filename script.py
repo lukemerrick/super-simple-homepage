@@ -1,4 +1,7 @@
 from string import Template
+import os
+import shutil
+from distutils.dir_util import copy_tree
 
 """ -----------------Template key-------------------------
 	title: page title to be displayed on the tab in which page is open
@@ -18,6 +21,9 @@ from string import Template
 button_skeleton = '<li><a href="{0}" class="btn btn-default btn-lg"><i class="{1}"></i> <span class="network-name">{2}</span></a></li>'
 link_skeleton = '<li><a href="{0}">{1}</a></li>'
 link_separator = '<li class="footer-menu-divider">&sdot;</li>'
+
+input_folder = r'C:\Users\luke\Documents\GitHub\super-simple-homepage\materials'
+template_folder = r'C:\Users\luke\Documents\GitHub\super-simple-homepage\Custom Theme'
 output_folder = 'generated_website'
 
 # read in template
@@ -25,11 +31,11 @@ with open('Custom Theme/template.html','r') as template_file:
 	template_string = template_file.read()
 
 # read in mission statement
-with open('mission.txt','r') as mission_text_file:
+with open(input_folder + '/mission.txt','r') as mission_text_file:
 	mission_text = mission_text_file.read()
 	
 # read in user-submitted info
-with open('info.txt','r') as info_file:
+with open(input_folder + '/info.txt','r') as info_file:
 	info_lines = info_file.readlines()
 
 def as_kwarg_str (k, v):
@@ -87,5 +93,21 @@ d['mission_text'] = mission_text
 
 template = Template(template_string)
 result = template.safe_substitute(d)
+
+# create output folder
+try:
+	shutil.rmtree(output_folder, ignore_errors = True)
+except:
+	pass
+os.mkdir(output_folder)
+copy_tree(template_folder, output_folder)
+
 with open (output_folder + '/index.html','w') as output:
 	output.write(result)
+
+# move photos to output folder
+shutil.copy2(input_folder + '/intro-bg.jpg', output_folder + '/img')
+shutil.copy2(input_folder + '/profile-photo.jpg', output_folder + '/img')
+
+# remove template.html from output folder
+os.remove(output_folder + '/template.html')
