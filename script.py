@@ -15,6 +15,11 @@ from string import Template
 	-----------------------------------------------------
 """
 
+button_skeleton = '<li><a href="{0}" class="btn btn-default btn-lg"><i class="{1}"></i> <span class="network-name">{2}</span></a></li>'
+link_skeleton = '<li><a href="{0}">{1}</a></li>'
+link_separator = '<li class="footer-menu-divider">&sdot;</li>'
+output_folder = 'generated_website'
+
 # read in template
 with open('Custom Theme/template.html','r') as template_file:
 	template_string = template_file.read()
@@ -29,34 +34,58 @@ with open('info.txt','r') as info_file:
 
 def as_kwarg_str (k, v):
 	return k + '=' + '\'' + v + '\''
+	
+
+""" Argument 0 is the link location, 1 is the glyphicon, and 2 is the link text"""
+def button_html(info):
+	trimmed = info.strip().split(': {')[1][:-1]
+	split = trimmed.split('","')
+	location = split[0][1:]
+	text = split[1]
+	glyphicon = split[2][:-1]
+	button = button_skeleton.format(location, glyphicon, text)
+	return button
+	
+""" Argument 0 is link location, 1 is link text """
+def link_html(info):
+	trimmed = info.strip().split(': {')[1][:-1]
+	split = trimmed.split('","')
+	location = split[0][1:]
+	text = split[1][:-1]
+	link = link_skeleton.format(location, text)
+	return link
 
 def parse_info(text):
 	kwarg_strs = []
+	button_lines = []
+	link_lines = []
 	for line in info_lines:
 		# extract strings from line
 		raw = line.split(': "')
 		k = raw[0]
-		v = raw[1][:raw[1].rfind('"')]
-		# add info to kwarg_strs
-		kwarg_strs.append(as_kwarg_str(k, v))
+		if 'button' in k:
+			button_lines.append(line)
+		elif 'link' in k:
+			link_lines.append(line)
+		else:
+			v = raw[1][:raw[1].rfind('"')]
+			# add info to kwarg_strs
+			kwarg_strs.append(as_kwarg_str(k, v))
+	# generate button and link html
+	buttons = '\n'.join(sorted([button_html(info) for info in button_lines]))
+	links = ('\n' + link_separator + '\n').join(sorted([link_html(info) for info in link_lines]))
 	kwargs_as_string = ', '.join(kwarg_strs)
 	d = eval('dict(%s)'%kwargs_as_string)
+	d['button_html'] = buttons
+	d['link_html'] = links
 	return d
 	
 	
 # generate template substitution dictionary
-d = dict(
-	name = 'JOHN Doe'
-	,subtitle = 'Homepage'
-	,mission_title = 'Mission Statement'
-	,mission_text = mission_text
-	,full_name = 'Jane Doe'
-)
 d = parse_info(info_lines)
 d['mission_text'] = mission_text
 
 template = Template(template_string)
 result = template.safe_substitute(d)
-with open ('result.html','w') as output:
+with open (output_folder + '/index.html','w') as output:
 	output.write(result)
-print('done?')
