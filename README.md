@@ -1,10 +1,10 @@
 ##Overview
 
-This project is a simple exercise in python templating to facilitate a somewhat updatable and customizable perosnal landing page that is fully static for easy hosting. The goal is to maintain *super simple* design so that users can quickly understand and completely customize where necessary.
+This project is a simple exercise in python templating to facilitate a somewhat updatable and customizable personal landing page that is fully static for easy hosting. The goal is to maintain *super simple* design so that users can quickly understand and completely customize where necessary.
 
 ##Updates
 
-I do not maintain/update this code regularly, but I mirror here any changes I make to the code in the process of tweaking my personal homepage. If you want to take this project and run with it, be my guest, but I'm sure it's probably been done more cleanly and with better documentation elsewhere.
+I do not maintain/update this code regularly, but I do post any changes I make to the code in the process of tweaking my own personal homepage. If you want to take this project and run with it, be my guest, but I bet there is probably better-written and better-documented code elsewhere on github for you to use as a starting point.
 
 ####Resources for using this code to make yourself a website
 
