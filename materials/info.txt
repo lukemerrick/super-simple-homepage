@@ -1,0 +1,13 @@
+title: "Test Page"
+name: "John Doe"
+subtitle: "Homepage"
+mission_title: "Mission Statement"
+full_name: "Jonathan B. Doe"
+copyright_year: "1999"
+button1: {"https://www.linkedin.com/","LinkedIn1","fa fa-linkedin fa-fw"}
+button2: {"https://www.linkedin.com/","LinkedIn2","fa fa-linkedin fa-fw"}
+button3: {"https://www.linkedin.com/","LinkedIn3","fa fa-linkedin fa-fw"}
+button4: {"https://www.google.com/","Google","fa fa-linkedin fa-fw"}
+link3: {"https://www.linkedin.com/","LinkedIn3"}
+link2: {"https://www.linkedin.com/","LinkedIn2"}
+link1: {"https://www.linkedin.com/","LinkedIn1"}
